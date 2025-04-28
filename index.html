@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Block Storage</title>
+    <link rel="stylesheet" href="blocksstyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Text Block Storage</h1>
+        <div class="header-buttons">
+            <button id="export-button">Export Data</button>
+            <button id="import-button">Import Data</button>
+            <button id="clear-button">Clear All</button>
+            <div>
+                <button id="layout-button">
+                    <div class="grid-icon">
+                        <div class="grid-dot"></div>
+                        <div class="grid-dot"></div>
+                        <div class="grid-dot"></div>
+                        <div class="grid-dot"></div>
+                        <div class="grid-dot"></div>
+                        <div class="grid-dot"></div>
+                        <div class="grid-dot"></div>
+                        <div class="grid-dot"></div>
+                        <div class="grid-dot"></div>
+                    </div>
+                </button>
+                <div class="layout-dropdown">
+                    <div class="layout-option" data-columns="1">
+                        <div class="grid-icon">
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                        </div>
+                        <span>1 Column</span>
+                    </div>
+                    <div class="layout-option" data-columns="2">
+                        <div class="grid-icon">
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                        </div>
+                        <span>2 Columns</span>
+                    </div>
+                    <div class="layout-option" data-columns="3">
+                        <div class="grid-icon">
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                            <div class="grid-dot"></div>
+                        </div>
+                        <span>3 Columns</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button id="color-button">Colors</button>
+                <div class="color-dropdown">
+                    <div class="color-option" data-color="#f0f0f0" style="background-color: #f0f0f0">
+                        <span>Default</span>
+                    </div>
+                    <div class="color-option" data-color="#FFB0FF" style="background-color: #FFB0FF">
+                        <span>Pink</span>
+                    </div>
+                    <div class="color-option" data-color="#669966" style="background-color: #669966">
+                        <span>Sage</span>
+                    </div>
+                    <div class="color-option" data-color="#B0C4DE" style="background-color: #B0C4DE">
+                        <span>Steel Blue</span>
+                    </div>
+                    <div class="color-option" data-color="#DEB887" style="background-color: #DEB887">
+                        <span>Burlywood</span>
+                    </div>
+                    <div class="color-option" data-color="#E6E6FA" style="background-color: #E6E6FA">
+                        <span>Lavender</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="input-group">
+            <label for="block-title">Title:</label>
+            <input type="text" id="block-title" placeholder="Enter a title for your text block">
+        </div>
+        <div class="input-group">
+            <label for="new-text">Text:</label>
+            <textarea id="new-text" placeholder="Enter your text here..."></textarea>
+        </div>
+        <button id="add-button">Add Text Block</button>
+        <div id="text-blocks"></div>
+    </div>
+    <input type="file" id="file-input" class="hidden" accept=".json">
+    <div class="copied-feedback">Copied!</div>
+    <script src="blockscript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
