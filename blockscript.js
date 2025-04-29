@@ -116,11 +116,11 @@ colorDots[0].classList.add('selected');
             }
         }
     }
-    function addTextBlock(text, title) {
+    function addTextBlock(text, title, color = null) {  // Add color parameter with null default
         const block = document.createElement('div');
         block.className = 'text-block';
         block.draggable = true;
-        block.style.backgroundColor = selectedColor;
+        block.style.backgroundColor = color || selectedColor;
 
         const titleDiv = document.createElement('div');
         titleDiv.className = 'block-title';
@@ -235,12 +235,7 @@ fileInput.addEventListener('change', (e) => {
                 const blocks = JSON.parse(e.target.result);
                 textBlocks.innerHTML = '';
                 blocks.forEach(block => {
-                    addTextBlock(block.text, block.title);
-                    // Add this to set the correct color from the imported data
-                    const newBlock = textBlocks.lastElementChild;
-                    if (block.color) {
-                        newBlock.style.backgroundColor = block.color;
-                    }
+                    addTextBlock(block.text, block.title, block.color);  // Pass the color
                 });
                 saveTextBlocks();
             } catch (error) {
