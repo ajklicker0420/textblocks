@@ -233,11 +233,8 @@ fileInput.addEventListener('change', (e) => {
         reader.onload = (e) => {
             try {
                 const blocks = JSON.parse(e.target.result);
-                textBlocks.innerHTML = '';
-                blocks.forEach(block => {
-                    addTextBlock(block.text, block.title, block.color);  // Pass the color
-                });
-                saveTextBlocks();
+                localStorage.setItem('textBlocks', JSON.stringify(blocks));
+                location.reload();  // Refresh the page
             } catch (error) {
                 alert('Invalid backup file');
             }
