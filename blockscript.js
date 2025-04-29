@@ -14,6 +14,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const colorButton = document.getElementById('color-button');
     const colorDropdown = document.querySelector('.color-dropdown');
     const colorOptions = document.querySelectorAll('.color-option');
+    const colorDots = document.querySelectorAll('.color-dot');
+let selectedColor = '#f8f8f8'; // Default color
+
+colorDots.forEach(dot => {
+    dot.addEventListener('click', () => {
+        colorDots.forEach(d => d.classList.remove('selected'));
+        dot.classList.add('selected');
+        selectedColor = dot.dataset.color;
+    });
+});
+
+// Select default color dot initially
+colorDots[0].classList.add('selected');
 
     colorButton.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -107,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const block = document.createElement('div');
         block.className = 'text-block';
         block.draggable = true;
+        block.style.backgroundColor = selectedColor;
 
         const titleDiv = document.createElement('div');
         titleDiv.className = 'block-title';
@@ -169,17 +183,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const blocks = Array.from(textBlocks.getElementsByClassName('text-block'))
             .map(block => ({
                 title: block.querySelector('.block-title').textContent,
-                text: block.querySelector('.text-content').textContent
+                text: block.querySelector('.text-content').textContent,
+                color: block.style.backgroundColor
             }));
         localStorage.setItem('textBlocks', JSON.stringify(blocks));
     }
 
-    function loadTextBlocks() {
-        const saved = localStorage.getItem('textBlocks');
-        if (saved) {
-            JSON.parse(saved).forEach(block => addTextBlock(block.text, block.title));
-        }
+function loadTextBlocks() {
+    const saved = localStorage.getItem('textBlocks');
+    if (saved) {
+        JSON.parse(saved).forEach(block => {
+            addTextBlock(block.text, block.title);
+            const newBlock = textBlocks.lastElementChild;
+            if (block.color) {
+                newBlock.style.backgroundColor = block.color;
+            }
+        });
     }
+}
 
     exportButton.addEventListener('click', () => {
         const blocks = Array.from(textBlocks.getElementsByClassName('text-block'))
