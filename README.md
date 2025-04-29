@@ -1,7 +1,7 @@
 A proof of concept starter project to make some things at work easier.
 1. save, view, and arrange blobs of text ✅
 2. copy blobs of text on-click ✅
-3. back up blobs of text as JSON✅
+3. back up all blobs of text as one JSON✅
 4. restore JSON blobs of text ✅
 
 To Do
