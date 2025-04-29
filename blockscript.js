@@ -192,12 +192,52 @@ colorDots[0].classList.add('selected');
 function loadTextBlocks() {
     const saved = localStorage.getItem('textBlocks');
     if (saved) {
-        JSON.parse(saved).forEach(block => {
-            addTextBlock(block.text, block.title);
-            const newBlock = textBlocks.lastElementChild;
-            if (block.color) {
-                newBlock.style.backgroundColor = block.color;
-            }
+        const blocks = JSON.parse(saved);
+        blocks.forEach(block => {
+            const blockElement = document.createElement('div');
+            blockElement.className = 'text-block';
+            blockElement.draggable = true;
+            blockElement.style.backgroundColor = block.color || '#f8f8f8';  // Use stored color or default
+
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'block-title';
+            titleDiv.textContent = block.title;
+
+            const textContent = document.createElement('div');
+            textContent.className = 'text-content';
+            textContent.textContent = block.text;
+
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-button';
+            deleteButton.innerHTML = '×';
+
+            // Add your existing event listeners here
+            blockElement.addEventListener('click', (e) => {
+                if (e.target !== deleteButton) {
+                    navigator.clipboard.writeText(block.text);
+                    showCopiedFeedback(e);
+                }
+            });
+
+            deleteButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                blockElement.remove();
+                saveTextBlocks();
+            });
+
+            blockElement.addEventListener('dragstart', () => {
+                blockElement.classList.add('dragging');
+            });
+
+            blockElement.addEventListener('dragend', () => {
+                blockElement.classList.remove('dragging');
+                saveTextBlocks();
+            });
+
+            blockElement.appendChild(titleDiv);
+            blockElement.appendChild(textContent);
+            blockElement.appendChild(deleteButton);
+            textBlocks.appendChild(blockElement);
         });
     }
 }
