@@ -226,23 +226,30 @@ function loadTextBlocks() {
         fileInput.click();
     });
 
-    fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    const blocks = JSON.parse(e.target.result);
-                    textBlocks.innerHTML = '';
-                    blocks.forEach(block => addTextBlock(block.text, block.title));
-                    saveTextBlocks();
-                } catch (error) {
-                    alert('Invalid backup file');
-                }
-            };
-            reader.readAsText(file);
-        }
-    });
+fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const blocks = JSON.parse(e.target.result);
+                textBlocks.innerHTML = '';
+                blocks.forEach(block => {
+                    addTextBlock(block.text, block.title);
+                    // Add this to set the correct color from the imported data
+                    const newBlock = textBlocks.lastElementChild;
+                    if (block.color) {
+                        newBlock.style.backgroundColor = block.color;
+                    }
+                });
+                saveTextBlocks();
+            } catch (error) {
+                alert('Invalid backup file');
+            }
+        };
+        reader.readAsText(file);
+    }
+});
 
     clearButton.addEventListener('click', () => {
         if (confirm('Are you sure you want to delete all text blocks? This cannot be undone.')) {
