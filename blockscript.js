@@ -180,14 +180,14 @@ colorDots[0].classList.add('selected');
     });
 
     function saveTextBlocks() {
-        const blocks = Array.from(textBlocks.getElementsByClassName('text-block'))
-            .map(block => ({
-                title: block.querySelector('.block-title').textContent,
-                text: block.querySelector('.text-content').textContent,
-                color: block.style.backgroundColor
-            }));
-        localStorage.setItem('textBlocks', JSON.stringify(blocks));
-    }
+    const blocks = Array.from(textBlocks.getElementsByClassName('text-block'))
+        .map(block => ({
+            title: block.querySelector('.block-title').textContent,
+            text: block.querySelector('.text-content').textContent,
+            color: block.style.backgroundColor  // Add this line
+        }));
+    localStorage.setItem('textBlocks', JSON.stringify(blocks));
+}
 
 function loadTextBlocks() {
     const saved = localStorage.getItem('textBlocks');
