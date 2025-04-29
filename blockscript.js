@@ -184,10 +184,10 @@ colorDots[0].classList.add('selected');
         .map(block => ({
             title: block.querySelector('.block-title').textContent,
             text: block.querySelector('.text-content').textContent,
-            color: block.style.backgroundColor  // Add this line
+            color: block.style.backgroundColor || '#f8f8f8'  // Explicitly get color
         }));
     localStorage.setItem('textBlocks', JSON.stringify(blocks));
-}
+    }
 
 function loadTextBlocks() {
     const saved = localStorage.getItem('textBlocks');
@@ -243,23 +243,24 @@ function loadTextBlocks() {
 }
 
     exportButton.addEventListener('click', () => {
-        const blocks = Array.from(textBlocks.getElementsByClassName('text-block'))
-            .map(block => ({
-                title: block.querySelector('.block-title').textContent,
-                text: block.querySelector('.text-content').textContent
-            }));
-
-        const dataStr = JSON.stringify(blocks, null, 2);
-        const blob = new Blob([dataStr], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'text-blocks-backup.json';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+    const blocks = Array.from(textBlocks.getElementsByClassName('text-block'))
+        .map(block => ({
+            title: block.querySelector('.block-title').textContent,
+            text: block.querySelector('.text-content').textContent,
+            color: block.style.backgroundColor || '#f8f8f8'  // Explicitly get color
+        }));
+    
+    const dataStr = JSON.stringify(blocks, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'text-blocks-backup.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
     });
 
     importButton.addEventListener('click', () => {
