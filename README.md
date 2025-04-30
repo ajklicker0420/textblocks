@@ -7,7 +7,8 @@ A proof of concept starter project to make some things at work easier.
 
 To Do
 
-6. edit existing blobs of text ⬛
-7. Generate text as case/font insensitive barcode/QR code on block. Clicking block still copies the text ⬛
-8. Request feature ⬛
-9. Put text blocks in separate div ⬛
+6. Fix text wrapping for strings of text with no spaces ⬛
+7. edit existing blobs of text ⬛
+8. Generate text as case/font insensitive barcode/QR code on block. Clicking block still copies the text ⬛
+9. Request feature ⬛
+10. Put text blocks in separate div ⬛
