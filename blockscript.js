@@ -16,18 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const colorOptions = document.querySelectorAll('.color-option');
     const colorDots = document.querySelectorAll('.color-dot');
     const customDropdowns = document.getElementsByClassName('custom-dropdown');
-let selectedColor = '#f8f8f8'; // Default color
+    let selectedColor = '#f8f8f8'; // Default color
 
-colorDots.forEach(dot => {
-    dot.addEventListener('click', () => {
-        colorDots.forEach(d => d.classList.remove('selected'));
-        dot.classList.add('selected');
-        selectedColor = dot.dataset.color;
+    colorDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            colorDots.forEach(d => d.classList.remove('selected'));
+            dot.classList.add('selected');
+            selectedColor = dot.dataset.color;
+        });
     });
-});
 
-// Select default color dot initially
-colorDots[0].classList.add('selected');
+    // Select default color dot initially
+    colorDots[0].classList.add('selected');
 
     colorButton.addEventListener('click', (e) => {
         collapseDropdowns(colorDropdown);
@@ -102,14 +102,14 @@ colorDots[0].classList.add('selected');
             // Use the 'out of viewport hidden text area' trick
             const textArea = document.createElement("textarea");
             textArea.value = textToCopy;
-                
+
             // Move textarea out of the viewport so it's not visible
             textArea.style.position = "absolute";
             textArea.style.left = "-999999px";
-                
+
             document.body.prepend(textArea);
             textArea.select();
-    
+
             try {
                 document.execCommand('copy');
             } catch (error) {
@@ -183,109 +183,109 @@ colorDots[0].classList.add('selected');
     });
 
     function saveTextBlocks() {
-    const blocks = Array.from(textBlocks.getElementsByClassName('text-block'))
-        .map(block => ({
-            title: block.querySelector('.block-title').textContent,
-            text: block.querySelector('.text-content').textContent,
-            color: block.style.backgroundColor || '#f8f8f8'  // Explicitly get color
-        }));
-    localStorage.setItem('textBlocks', JSON.stringify(blocks));
+        const blocks = Array.from(textBlocks.getElementsByClassName('text-block'))
+            .map(block => ({
+                title: block.querySelector('.block-title').textContent,
+                text: block.querySelector('.text-content').textContent,
+                color: block.style.backgroundColor || '#f8f8f8'  // Explicitly get color
+            }));
+        localStorage.setItem('textBlocks', JSON.stringify(blocks));
     }
 
-function loadTextBlocks() {
-    const saved = localStorage.getItem('textBlocks');
-    if (saved) {
-        const blocks = JSON.parse(saved);
-        blocks.forEach(block => {
-            const blockElement = document.createElement('div');
-            blockElement.className = 'text-block';
-            blockElement.draggable = true;
-            blockElement.style.backgroundColor = block.color || '#f8f8f8';  // Use stored color or default
+    function loadTextBlocks() {
+        const saved = localStorage.getItem('textBlocks');
+        if (saved) {
+            const blocks = JSON.parse(saved);
+            blocks.forEach(block => {
+                const blockElement = document.createElement('div');
+                blockElement.className = 'text-block';
+                blockElement.draggable = true;
+                blockElement.style.backgroundColor = block.color || '#f8f8f8';  // Use stored color or default
 
-            const titleDiv = document.createElement('div');
-            titleDiv.className = 'block-title';
-            titleDiv.textContent = block.title;
+                const titleDiv = document.createElement('div');
+                titleDiv.className = 'block-title';
+                titleDiv.textContent = block.title;
 
-            const textContent = document.createElement('div');
-            textContent.className = 'text-content';
-            textContent.textContent = block.text;
+                const textContent = document.createElement('div');
+                textContent.className = 'text-content';
+                textContent.textContent = block.text;
 
-            const deleteButton = document.createElement('button');
-            deleteButton.className = 'delete-button';
-            deleteButton.innerHTML = '×';
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.innerHTML = '×';
 
-            // Add your existing event listeners here
-            blockElement.addEventListener('click', (e) => {
-                if (e.target !== deleteButton) {
-                    navigator.clipboard.writeText(block.text);
-                    showCopiedFeedback(e);
-                }
+                // Add your existing event listeners here
+                blockElement.addEventListener('click', (e) => {
+                    if (e.target !== deleteButton) {
+                        navigator.clipboard.writeText(block.text);
+                        showCopiedFeedback(e);
+                    }
+                });
+
+                deleteButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    blockElement.remove();
+                    saveTextBlocks();
+                });
+
+                blockElement.addEventListener('dragstart', () => {
+                    blockElement.classList.add('dragging');
+                });
+
+                blockElement.addEventListener('dragend', () => {
+                    blockElement.classList.remove('dragging');
+                    saveTextBlocks();
+                });
+
+                blockElement.appendChild(titleDiv);
+                blockElement.appendChild(textContent);
+                blockElement.appendChild(deleteButton);
+                textBlocks.appendChild(blockElement);
             });
-
-            deleteButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                blockElement.remove();
-                saveTextBlocks();
-            });
-
-            blockElement.addEventListener('dragstart', () => {
-                blockElement.classList.add('dragging');
-            });
-
-            blockElement.addEventListener('dragend', () => {
-                blockElement.classList.remove('dragging');
-                saveTextBlocks();
-            });
-
-            blockElement.appendChild(titleDiv);
-            blockElement.appendChild(textContent);
-            blockElement.appendChild(deleteButton);
-            textBlocks.appendChild(blockElement);
-        });
+        }
     }
-}
 
     exportButton.addEventListener('click', () => {
-    const blocks = Array.from(textBlocks.getElementsByClassName('text-block'))
-        .map(block => ({
-            title: block.querySelector('.block-title').textContent,
-            text: block.querySelector('.text-content').textContent,
-            color: block.style.backgroundColor || '#f8f8f8'  // Explicitly get color
-        }));
-    
-    const dataStr = JSON.stringify(blocks, null, 2);
-    const blob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'text-blocks-backup.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+        const blocks = Array.from(textBlocks.getElementsByClassName('text-block'))
+            .map(block => ({
+                title: block.querySelector('.block-title').textContent,
+                text: block.querySelector('.text-content').textContent,
+                color: block.style.backgroundColor || '#f8f8f8'  // Explicitly get color
+            }));
+
+        const dataStr = JSON.stringify(blocks, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'text-blocks-backup.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     });
 
     importButton.addEventListener('click', () => {
         fileInput.click();
     });
 
-fileInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            try {
-                const blocks = JSON.parse(e.target.result);
-                localStorage.setItem('textBlocks', JSON.stringify(blocks));
-                location.reload();  // Refresh the page
-            } catch (error) {
-                alert('Invalid backup file');
-            }
-        };
-        reader.readAsText(file);
-    }
-});
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const blocks = JSON.parse(e.target.result);
+                    localStorage.setItem('textBlocks', JSON.stringify(blocks));
+                    location.reload();  // Refresh the page
+                } catch (error) {
+                    alert('Invalid backup file');
+                }
+            };
+            reader.readAsText(file);
+        }
+    });
 
     clearButton.addEventListener('click', () => {
         if (confirm('Are you sure you want to delete all text blocks? This cannot be undone.')) {
