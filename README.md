@@ -8,7 +8,9 @@ A proof of concept starter project to make some things at work easier.
 To Do
 
 6. Fix text wrapping for strings of text with no spaces ⬛
-7. edit existing blobs of text ⬛
-8. Generate text as case/font insensitive barcode/QR code on block. Clicking block still copies the text ⬛
-9. Request feature ⬛
-10. Put text blocks in separate div ⬛
+7. OR Detect Links ⬛
+8. OR Both ⬛
+9. edit existing blobs of text ⬛
+10. Generate text as case/font insensitive barcode/QR code on block. Clicking block still copies the text ⬛
+11. Request feature ⬛
+12. Put text blocks in separate div ⬛
