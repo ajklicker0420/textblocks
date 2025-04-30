@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const colorDropdown = document.querySelector('.color-dropdown');
     const colorOptions = document.querySelectorAll('.color-option');
     const colorDots = document.querySelectorAll('.color-dot');
+    const customDropdowns = document.getElementsByClassName('custom-dropdown');
 let selectedColor = '#f8f8f8'; // Default color
 
 colorDots.forEach(dot => {
@@ -29,6 +30,7 @@ colorDots.forEach(dot => {
 colorDots[0].classList.add('selected');
 
     colorButton.addEventListener('click', (e) => {
+        collapseDropdowns(colorDropdown);
         e.stopPropagation();
         colorDropdown.classList.toggle('show');
     });
@@ -48,12 +50,13 @@ colorDots[0].classList.add('selected');
         document.body.style.backgroundColor = preferredColor;
     }
     layoutButton.addEventListener('click', (e) => {
+        collapseDropdowns(layoutDropdown);
         e.stopPropagation();
         layoutDropdown.classList.toggle('show');
     });
 
     document.addEventListener('click', () => {
-        layoutDropdown.classList.remove('show');
+        collapseDropdowns(null);
     });
 
     layoutOptions.forEach(option => {
@@ -290,4 +293,12 @@ fileInput.addEventListener('change', (e) => {
             localStorage.removeItem('textBlocks');
         }
     });
+
+    function collapseDropdowns(dropdownToKeep) {
+        for (let dropdown of customDropdowns) {
+            if (dropdown != dropdownToKeep) {
+                dropdown.classList.remove('show');
+            }
+        }
+    }
 });
