@@ -15,3 +15,4 @@ To Do
 11. Request feature ⬛
 12. Put text blocks in separate div ⬛
 13. Test "Document Picture-in-Picture" ❌ Not supported by all broswers at this time. Any browsers really
+14. Electron
