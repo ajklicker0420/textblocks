@@ -14,5 +14,5 @@ To Do
 10. Generate text as case/font insensitive barcode/QR code on block. Clicking block still copies the text ⬛
 11. Request feature ⬛
 12. Put text blocks in separate div ⬛
-13. Test "Document Picture-in-Picture" ❌ Not supported by all broswers at this time. Any browsers really
-14. Electron
+13. Test "Document Picture-in-Picture" ❌ Not supported by all browsers at this time. Any browsers really
+14. Electron?
