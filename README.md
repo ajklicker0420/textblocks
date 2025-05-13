@@ -1,18 +1,18 @@
 A proof of concept starter project to make some things at work easier.
-1. save, view, and arrange blobs of text ✅
-2. copy blobs of text on-click ✅
-3. back up all blobs of text as one JSON✅
-4. restore JSON blobs of text ✅
-5. Emoji Support 🍒
+✅save, view, and arrange blobs of text ✅
+✅copy blobs of text on-click ✅
+✅back up all blobs of text as one JSON✅
+✅restore JSON blobs of text 
+✅Emoji Support 🍒
 
 To Do
-
-6. Fix text wrapping for strings of text with no spaces ⬛
-7. OR Detect Links ⬛
-8. OR Both ⬛
-9. edit existing blobs of text ⬛
-10. Generate text as case/font insensitive barcode/QR code on block. Clicking block still copies the text ⬛
-11. Request feature ⬛
-12. Put text blocks in separate div ⬛
-13. Test "Document Picture-in-Picture" ❌ Not supported by all browsers at this time. Any browsers really
-14. Electron
+⬛hashtag filtering
+⬛Fix text wrapping for strings of text with no spaces
+⬛OR Detect Links
+⬛OR Both
+⬛edit existing blobs of text
+⬛Generate text as case/font insensitive barcode/QR code on block. Clicking block still copies the text
+⬛Request feature
+⬛Put text blocks in separate div
+⬛Test "Document Picture-in-Picture" ❌ Not supported by all browsers at this time. Any browsers really
+⬛Electron
